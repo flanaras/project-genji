@@ -1,0 +1,8 @@
+#!/bin/bash
+
+
+prefix=$1
+path=~/logs/
+mkdir -p $path
+
+nvidia-smi pmon -s u -d 1 -o TD >> $path$prefix-nvidia-log

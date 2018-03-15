@@ -1,0 +1,21 @@
+#!/bin/bash
+
+caffe_root=~/caffe/
+model_base="_alexnet"
+model=$1
+
+path=~/logs/
+timestamp=$(date +%Y%m%d%H%M%S)
+
+name=$timestamp-$model$model_base
+
+bash -c "while true; do ./caffe-stats $name; sleep 1; done" &
+./nvidia-stats $name &	
+nvp=$!
+
+cd $caffe_root
+nvprof --export-profile $path/$name.nvprof /usr/bin/time -v -o "$path$name-time" build/tools/caffe train --solver=models/$model$model_base/solver.prototxt --gpu 1 | tee $path$name-caffe.log
+cd -
+
+kill $nvp
+pkill -P $$
