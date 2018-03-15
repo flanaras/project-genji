@@ -9,5 +9,5 @@ mkdir -p $path
 
 timestamp=$(date "+%Y%m%d%t%T%t")
 ps=$(ps -ax -o pid,vsz,rss,min_flt,maj_flt,time,cmd | grep -v "grep\|stats\|time" | grep caffe)
-echo $timestamp$ps >> $path$prefix-caffe-ps
+echo $timestamp$ps >> $path$prefix-ps.log
 

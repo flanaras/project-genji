@@ -6,4 +6,4 @@ prefix=$2
 
 mkdir -p $path
 
-nvidia-smi pmon -s u -d 1 -o TD >> $path$prefix-nvidia-log
+nvidia-smi pmon -s u -d 1 -o TD >> $path$prefix-nvidia.log
