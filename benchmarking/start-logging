@@ -17,7 +17,7 @@ bash -c "while true; do ./caffe-stats $path $name; sleep 1; done" &
 nvp=$!
 
 cd $caffe_root
-nvprof --export-profile $path$name.nvprof /usr/bin/time -v -o $path$name-time build/tools/caffe train --solver=models/$model$model_base/solver.prototxt --gpu 1 2>&1 | tee $path$name-caffe.log
+nvprof --profile-child-processes --export-profile $path$name-%p.nvprof /usr/bin/time -v -o $path$name-time build/tools/caffe train --solver=models/$model$model_base/solver.prototxt --gpu 1 2>&1 | tee $path$name-caffe.log
 cd -
 
 kill $nvp
