@@ -21,4 +21,4 @@ nvprof --profile-child-processes --export-profile $path$name-%p.nvprof /usr/bin/
 cd -
 
 #get group id: awk '{print $5}' < /proc/6691/stat
-pkill -g $$
+pkill -15 -g $$
