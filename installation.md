@@ -221,14 +221,50 @@ make runtest
 make pycaffe
 ```
 
+## NVCaffe
+### nasm
+https://www.nasm.us/pub/nasm/releasebuilds/2.13.03/nasm-2.13.03.tar.gz
+https://www.nasm.us/xdoc/2.13.03/html/nasmdocd.html#section-D.1
+```
+sh configure --prefix=$HOME/builds
+make all
+make install
+```
+### libjpeg turbo
+# building info at BUILDING.md
+https://sourceforge.net/projects/libjpeg-turbo/files/1.5.3/libjpeg-turbo-1.5.3.tar.gz/download
+```
+autoreconf -fiv
+mkdir build
+cd build
+sh ../configure --prefix=$HOME/builds
+make
+make install
+```
+### NVCaffe build
+```
+use same conf file as Caffe + LIBRARY_NAME_SUFFIX := -nv # at the end of the file.
+make same
+```
+
+
 ## Personal
+### perl for git
+https://github.com/Perl/perl5/releases
+```
+./Configure -des -Dprefix=$HOME/builds
+make
+make test
+make install
+```
+
 ### git
 https://github.com/git/git/
 ```
 $ tar -zxf git-2.0.0.tar.gz
 $ cd git-2.0.0
 $ make configure
-$ ./configure --prefix=/usr
+$ ./configure --prefix=$HOME/builds --with-perl=$HOME/builds/bin/perl
 $ make all #doc info
 $ make install #install-doc install-html install-info
 ```
