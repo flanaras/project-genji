@@ -1,0 +1,23 @@
+#!/bin/bash
+
+cp nfs_ib_alexnet-sgd-b256-nvidia.log nvidia-preprocessing.log
+
+# delete header lines
+sed '/#/d' -i nvidia-preprocessing.log
+
+# delete empty lines
+sed '/-   -/d' -i nvidia-preprocessing.log
+
+# Delete spaces in the beginning of dates
+sed 's/[^ ]* //' -i nvidia-preprocessing.log
+
+# Convert multiple to single space
+sed 's/ \+/ /g' -i nvidia-preprocessing.log
+
+sed 's/ $//g' -i nvidia-preprocessing.log
+
+# convert space to coma
+sed 's/ /,/g' -i nvidia-preprocessing.log
+
+# add header
+sed '1 i\Date,Time,gpu,pid,type,sm,mem,enc,dec,command' -i nvidia-preprocessing.log 

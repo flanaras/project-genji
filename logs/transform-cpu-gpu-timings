@@ -1,0 +1,34 @@
+#!/bin/bash
+
+cat test | grep -i "solver.cpp:331\|solver.cpp:339\|base_data_layer.cu:28" > newlogs.log
+
+# Delete 10 first lines
+sed -e '1,10d' -i newlogs.log
+
+# delete first number to space
+sed 's/[^ ]* //' -i newlogs.log
+
+# remove "  pid file:line]"
+sed 's/[0-9:.]\+ .\+]//' -i newlogs.log
+
+# remove duplicate spaces
+sed 's/[ ]\+//' -i newlogs.log
+
+# add ,\ on the first and second line in order to combine them
+sed '1~3 s/$/,\\/g' -i newlogs.log
+sed '2~3 s/$/,\\/g' -i newlogs.log
+
+# delete first number to space
+sed 's/[^ ]* //' -i newlogs.log
+
+# combine lines on "\"
+sed ':x /\\$/{N; s|\\'$'\\n||; tx}' -i newlogs.log
+
+## add header
+sed -i '1 i\datalayer,cpretrain-callback,cforward-backward,cupdate-smooth-loss,cposttrain-callback,capplyupdate,cfulliteration,gpretrain-callback,gforward-backward,gupdate-smooth-loss,gposttrain-callback,gapplyupdate,gfulliteration' newlogs.log
+#
+#
+#192810\
+#8,243271,7,6,453,254880\
+#1.888,322185,1.856,1.856,3054.14,325666
+
