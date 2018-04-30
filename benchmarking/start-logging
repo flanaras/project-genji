@@ -1,24 +1,5 @@
 #!/bin/bash
 
-caffe_root=~/caffe/
-model_base="_alexnet"
-model=$1
+./train $1
 
-path_root=~/logs/
-timestamp=$(date +%Y.%m.%d.%H%M:%S)
-
-path=$path_root$timestamp/
-name=$model$model_base
-
-mkdir -p $path
-
-bash -c "while true; do ./caffe-stats $path $name; sleep 1; done" &
-./nvidia-stats $path $name &	
-nvp=$!
-
-cd $caffe_root
-nvprof --profile-child-processes --export-profile $path$name-%p.nvprof /usr/bin/time -v -o $path$name-time.log build/tools/caffe train --solver=models/$model$model_base/solver.prototxt --gpu 1 2>&1 | tee $path$name-caffe.log
-cd -
-
-#get group id: awk '{print $5}' < /proc/6691/stat
-pkill -15 -g $$
+./clean-up
