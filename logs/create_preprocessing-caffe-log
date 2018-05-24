@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cat nfs_alexnet-caffe.log | grep -i "data_layer.cpp:130\|data_layer.cpp:129\|data_layer.cpp:128" > caffe-preprocessing.log
+cat $1 | grep -i "data_layer.cpp:130\|data_layer.cpp:129\|data_layer.cpp:128" > caffe-preprocessing.log
 
 # delete first number to space
 sed 's/[^ ]* //' -i caffe-preprocessing.log
