@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cp nfs_ib_alexnet-sgd-b256-nvidia.log nvidia-preprocessing.log
+cp $1 nvidia-preprocessing.log
 
 # delete header lines
 sed '/#/d' -i nvidia-preprocessing.log
