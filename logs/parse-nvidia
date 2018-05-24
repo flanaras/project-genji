@@ -1,23 +1,23 @@
 #!/bin/bash
 
-cp $1 nvidia-preprocessing.log
+cp $1 nvidia-preprocessing$2.log
 
 # delete header lines
-sed '/#/d' -i nvidia-preprocessing.log
+sed '/#/d' -i nvidia-preprocessing$2.log
 
 # delete empty lines
-sed '/-   -/d' -i nvidia-preprocessing.log
+sed '/-   -/d' -i nvidia-preprocessing$2.log
 
 # Delete spaces in the beginning of dates
-sed 's/[^ ]* //' -i nvidia-preprocessing.log
+sed 's/[^ ]* //' -i nvidia-preprocessing$2.log
 
 # Convert multiple to single space
-sed 's/ \+/ /g' -i nvidia-preprocessing.log
+sed 's/ \+/ /g' -i nvidia-preprocessing$2.log
 
-sed 's/ $//g' -i nvidia-preprocessing.log
+sed 's/ $//g' -i nvidia-preprocessing$2.log
 
 # convert space to coma
-sed 's/ /,/g' -i nvidia-preprocessing.log
+sed 's/ /,/g' -i nvidia-preprocessing$2.log
 
 # add header
-sed '1 i\Date,Time,gpu,pid,type,sm,mem,enc,dec,command' -i nvidia-preprocessing.log 
+sed '1 i\Date,Time,gpu,pid,type,sm,mem,enc,dec,command' -i nvidia-preprocessing$2.log 

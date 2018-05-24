@@ -1,31 +1,31 @@
 #!/bin/bash
 
-cat $1 | grep -i "solver.cpp:335\|solver.cpp:343\|base_data_layer.cu:31" > instrumentated-timings.log
+cat $1 | grep -i "solver.cpp:335\|solver.cpp:343\|base_data_layer.cu:31" > instrumentated-timings$2.log
 
 # Delete 10 first lines
-#sed -e '1,10d' -i instrumentated-timings.log
+#sed -e '1,10d' -i instrumentated-timings$2.log
 
 # delete first number to space
-sed 's/[^ ]* //' -i instrumentated-timings.log
+sed 's/[^ ]* //' -i instrumentated-timings$2.log
 
 # remove "  pid file:line]"
-sed 's/[0-9:.]\+ .\+]//' -i instrumentated-timings.log
+sed 's/[0-9:.]\+ .\+]//' -i instrumentated-timings$2.log
 
 # remove duplicate spaces
-sed 's/[ ]\+//' -i instrumentated-timings.log
+sed 's/[ ]\+//' -i instrumentated-timings$2.log
 
 # add ,\ on the first and second line in order to combine them
-sed '1~2 s/$/,\\/g' -i instrumentated-timings.log
-#sed '2~3 s/$/,\\/g' -i instrumentated-timings.log
+sed '1~2 s/$/,\\/g' -i instrumentated-timings$2.log
+#sed '2~3 s/$/,\\/g' -i instrumentated-timings$2.log
 
 # delete first number to space
-sed 's/[^ ]* //' -i instrumentated-timings.log
+sed 's/[^ ]* //' -i instrumentated-timings$2.log
 
 # combine lines on "\"
-sed ':x /\\$/{N; s|\\'$'\\n||; tx}' -i instrumentated-timings.log
+sed ':x /\\$/{N; s|\\'$'\\n||; tx}' -i instrumentated-timings$2.log
 
 ## add header
-sed -i '1 i\datalayer,datalayer2,cpretrain-callback,cforward-backward,cupdate-smooth-loss,cposttrain-callback,capplyupdate,cfulliteration,gpretrain-callback,gforward-backward,gupdate-smooth-loss,gposttrain-callback,gapplyupdate,gfulliteration' instrumentated-timings.log
+sed -i '1 i\datalayer,datalayer2,cpretrain-callback,cforward-backward,cupdate-smooth-loss,cposttrain-callback,capplyupdate,cfulliteration,gpretrain-callback,gforward-backward,gupdate-smooth-loss,gposttrain-callback,gapplyupdate,gfulliteration' instrumentated-timings$2.log
 #
 #
 #192810\

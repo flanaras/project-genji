@@ -1,33 +1,33 @@
 #!/bin/bash
 
-cat $1 | grep -i "data_layer.cpp:130\|data_layer.cpp:129\|data_layer.cpp:128" > caffe-preprocessing.log
+cat $1 | grep -i "data_layer.cpp:130\|data_layer.cpp:129\|data_layer.cpp:128" > caffe-preprocessing$2.log
 
 # delete first number to space
-sed 's/[^ ]* //' -i caffe-preprocessing.log
+sed 's/[^ ]* //' -i caffe-preprocessing$2.log
 
 # remove "  pid file:line]"
-sed 's/[ ]\+[0-9]\+ .\+]//' -i caffe-preprocessing.log
+sed 's/[ ]\+[0-9]\+ .\+]//' -i caffe-preprocessing$2.log
 
 # remove " ms."
-sed 's/ ms[.]$//' -i caffe-preprocessing.log
+sed 's/ ms[.]$//' -i caffe-preprocessing$2.log
 
 # parse read line (remove to "... Read time:"
-sed '2~3 s/.*: //' -i caffe-preprocessing.log
+sed '2~3 s/.*: //' -i caffe-preprocessing$2.log
 
 # parse transform line
-sed '3~3 s/.*: //' -i caffe-preprocessing.log
+sed '3~3 s/.*: //' -i caffe-preprocessing$2.log
 
 # parse batch line, keeping the time
-sed '1~3 s/ .*: /,/' -i caffe-preprocessing.log
+sed '1~3 s/ .*: /,/' -i caffe-preprocessing$2.log
 
 # add ,\ on the first and second line in order to combine them
-sed '1~3 s/$/,\\/' -i caffe-preprocessing.log
-sed '2~3 s/$/,\\/' -i caffe-preprocessing.log
+sed '1~3 s/$/,\\/' -i caffe-preprocessing$2.log
+sed '2~3 s/$/,\\/' -i caffe-preprocessing$2.log
 
 # combine lines on "\"
-sed ':x /\\$/{N; s|\\'$'\\n||; tx }' -i caffe-preprocessing.log
+sed ':x /\\$/{N; s|\\'$'\\n||; tx }' -i caffe-preprocessing$2.log
 
 # add header
-sed -i '1 i\time,batch_time,read_time,transform_time' caffe-preprocessing.log 
+sed -i '1 i\time,batch_time,read_time,transform_time' caffe-preprocessing$2.log 
 
 
