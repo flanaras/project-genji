@@ -1,0 +1,3 @@
+#!/bin/bash
+
+nvidia-smi dmon -s umt -d 1 -o TD

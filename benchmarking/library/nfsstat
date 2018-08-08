@@ -1,0 +1,13 @@
+#!/bin/bash
+
+#watch -n 1 "echo '`date "+%Y%m%d%t%T%t"`'; ps -ax -o pid,vsz,rss,min_flt,maj_flt,time,cmd | grep -v grep | grep caffe >> logs"
+path=$1
+prefix=$2
+mkdir -p $path
+
+#echo #pid,vsz,rss,min_flt,maj_flt,time,cmd >> $path/caffe-log
+
+timestamp=$(date "+%Y%m%d%t%T%t")
+ps=$(ps -ax -o pid,vsz,rss,min_flt,maj_flt,pcpu,time,cmd | grep -v "grep\|stats\|time\|tee" | grep caffe)
+echo $timestamp$ps >> $path$prefix-ps.log
+

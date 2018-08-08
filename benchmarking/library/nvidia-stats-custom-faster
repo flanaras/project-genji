@@ -1,0 +1,6 @@
+#!/bin/bash
+
+while true
+do
+	nvidia-smi --query-gpu=utilization.gpu,utilization.memory,memory.total,memory.free,memory.used --format=csv -lms 166
+done
