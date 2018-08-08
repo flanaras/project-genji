@@ -37,3 +37,5 @@ I have corvered this process on [a previous post (flanaras.wordpress.com)](https
 ## Folders
 
 * [benchmarking/README.md](benchmarking/README.md) scripts to collect measurements.
+
+* [logs/README.md](logs/README.md) scripts to parse and extract information from files gathered from [../benchmarking/README.md](../benchmarking/README.md).

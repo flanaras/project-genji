@@ -1,0 +1,5 @@
+#!/bin/bash
+
+mv caffe-preprocessing.log caffe-preprocessing-$1.log
+mv instrumentated-timings.log instrumentated-timings-$1.log
+mv nvidia-preprocessing.log nvidia-preprocessing-$1.log

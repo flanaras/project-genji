@@ -1,0 +1,5 @@
+#!/bin/bash
+
+../transform-cpu-gpu-timings $1
+
+../create_preprocessing-caffe-log $1
