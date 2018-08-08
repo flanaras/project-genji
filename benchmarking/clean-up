@@ -1,3 +1,3 @@
 #!/bin/bash
 
-/home_nfs_robin_ib/xlanarasp/stress-ng-0.09.26/stress-ng stress --vm-bytes $(awk '/MemAvailable/{printf "%d\n", $2 * 1;}' < /proc/meminfo)k --vm-keep -m 50 −−oomable -t 20
+~/stress-ng-0.09.26/stress-ng stress --vm-bytes $(awk '/MemAvailable/{printf "%d\n", $2 * 1;}' < /proc/meminfo)k --vm-keep -m 50 −−oomable -t 20
