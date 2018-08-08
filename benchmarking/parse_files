@@ -1,0 +1,14 @@
+#!/bin/bash
+
+log_folder=$1
+caffe=$2
+nvidia=$3
+batch=$4
+
+cd $log_folder
+
+$HOME/logs/parse-nvidia $nvidia $batch
+$HOME/logs/transform-cpu-gpu-timings $caffe $batch
+$HOME/logs/create_preprocessing-caffe-log $caffe $batch
+
+cd -

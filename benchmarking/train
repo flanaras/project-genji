@@ -1,23 +1,29 @@
 #!/bin/bash
 
+caffe_who=nvcaffe
+caffe_who=dev/caffe-instrumented
 caffe_who=dev/caffe
 
 caffe_root=~/$caffe_who/
 model_base="_alexnet"
 model=$1
-caffe_who=dev-caffe
+
+caffe_who=caffe-original
+caffe_who=caffe-my
 #caffe_who=caffe-p100
 
 path_root=~/logs/
 timestamp=$(date +%Y.%m.%d.%H%M:%S)
 
-specs=-sgd-b512
+batch=-b256
+specs=-sgd$batch-$model-sbs4
 path=$path_root$timestamp$specs-$caffe_who/
-name=$model$model_base$specs
+name=$model$model_base$specs-$caffe_who
 
 mkdir -p $path
 
 bash -c "while true; do ./caffe-stats $path $name; sleep 1; done" &
+pspid=$!
 ./nvidia-stats $path $name &	
 nvp=$!
 
@@ -25,5 +31,8 @@ cd $caffe_root
 nvprof --profile-child-processes --export-profile $path$name-%p.nvprof /usr/bin/time -v -o $path$name-time.log build/tools/caffe train --solver=models/$model$model_base/solver.prototxt --gpu 1 2>&1 | tee $path$name-caffe.log
 cd -
 
+./parse_files $path $path$name-caffe.log $path$name-nvidia.log $batch
+
 #get group id: awk '{print $5}' < /proc/6691/stat
+kill -9 $pspid
 pkill -15 -g $$
