@@ -4,5 +4,5 @@ A repository with instructions to install Machine learning frameworks such as Ca
 
 Versions building for:
 
-* Caffe 1.0 (git branch master) 
+* Caffe 1.0 (master commit 379a3ba2d5421a6ac05afa4239c30739cc79f7b0) 
 * TensorFlow r1.5 (git branch r1.5) 
