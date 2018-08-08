@@ -33,3 +33,7 @@ I have corvered this process on [a previous post (flanaras.wordpress.com)](https
 * [inst-dbg.md](inst-dbg.md) shows how to build from sources the dgb with dgbserver and its dependencies. Dependencies other than those included in the [installation.md](installation.md).
 
 * [stap.md](stap.md) contains the info gathered from my attempt trying to use it. It does **not** work with openSUSE tumbleweed since tumbleweed uses the latest kernel and stap does not support them.
+
+## Folders
+
+* [benchmarking/README.md](benchmarking/README.md) scripts to collect measurements.
